@@ -105,7 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'ilearnol',
         'USER':'root',
-        'PASSWORD':'infection',
+        'PASSWORD':'root',
         'HOST':'127.0.0.1'
     }
 }
