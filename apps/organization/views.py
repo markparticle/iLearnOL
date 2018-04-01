@@ -181,7 +181,7 @@ class AddFavView(View):
         fav_type = request.POST.get('fav_type',0)
         #判断用户是否用户
         if not request.user.is_authenticated:  #判断用户是否登录
-            return HttpResponse('{"status":"fail", "msg":"用户未登录"}',content_type='application/json')
+            return HttpResponse('{"status":"fail", "msg":"用户未登录"}', content_type='application/json')
         exist_records = UserFavorite.objects.filter(user=request.user,fav_id=int(fav_id),fav_type=int(fav_type))  #联合查询  module里面要求了Int类型 要转换
         if exist_records:
             #如果记录存在，则表示用户取消收藏
@@ -209,7 +209,7 @@ class AddFavView(View):
                     teacher.fav_nums = 0
                 teacher.save()
 
-            return HttpResponse('{"status":"fail", "msg":"已取消收藏"}',content_type='application/json')
+            return HttpResponse('{"status":"fail", "msg":"已取消收藏"}', content_type='application/json')
         else:
             user_fav = UserFavorite()
             if int(fav_id) >0 and int(fav_type)>0:
@@ -233,9 +233,11 @@ class AddFavView(View):
                     teacher = Course.objects.get(id=int(fav_id))
                     teacher.fav_nums += 1
                     teacher.save()
-                return HttpResponse('{"status":"success","msg":"已收藏"}',content_type='application/json')
+
+
+                return HttpResponse('{"status":"success", "msg":"已收藏"}', content_type='application/json')
             else:
-                return HttpResponse('{"status":"fail","msg":"收藏出错"}', content_type='application/json')
+                return HttpResponse('{"status":"fail", "msg":"收藏出错"}', content_type='application/json')
 
 
 
@@ -252,7 +254,7 @@ class TeacherListView(View):
 
             all_teachers = all_teachers.filter(
                 Q(name__icontains=search_keywords) | Q(work_company__icontains=search_keywords)| Q(work_postion__icontains=search_keywords))
-
+	
         # 排序
         sort = request.GET.get('sort', "")
         if sort:
@@ -266,7 +268,7 @@ class TeacherListView(View):
             page = request.GET.get('page', 2)
         except PageNotAnInteger:
             page = 1
-        p = Paginator(all_teachers, 1, request=request)  # 每页取5个显示
+        p = Paginator(all_teachers, 5, request=request)  # 每页取5个显示
         teachers = p.page(page)
 
         return render(request, 'teachers-list.html', {
@@ -274,7 +276,8 @@ class TeacherListView(View):
             "teacher_nums": teacher_nums,
             'sorted_teacher':sorted_teacher,
             'sort':sort,
-            'search_keywords':search_keywords
+	    'teacher_nums':teacher_nums,
+            'search_keywords':search_keywords,
          })
 
 class TeacherDetailView(View):

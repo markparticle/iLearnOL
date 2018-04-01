@@ -381,7 +381,7 @@ class IndexView(View):
     '''
     def get(self,request):
         #取出轮播图
-        all_banners = Banner.objects.all().order_by('index')[:5]
+       	all_banners = Banner.objects.all().order_by('index')[:5]
         courses = Course.objects.filter(is_banner=False).order_by('-click_nums')[:6]
         banner_courses = Course.objects.filter(is_banner=True)[:3]
         courses_orgs = CourseOrg.objects.all().order_by('-click_nums')[:15]

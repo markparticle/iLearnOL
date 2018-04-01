@@ -26,7 +26,7 @@ SECRET_KEY = 'v)5dkleem#wt$ljtych(1k(aj*0_5)k#1c&yc3!_b6t4qtx$xt'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 #生产环境下要关掉debug模式
-DEBUG = True
+DEBUG = False
 
 #生产环境接收所有host
 ALLOWED_HOSTS = ['*']
@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'captcha',
     'pure_pagination',
     'DjangoUeditor',
-    'corsheaders',
 ]
 
 PAGINATION_SETTINGS = {
@@ -72,8 +71,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 
 ]
 
@@ -110,7 +107,8 @@ DATABASES = {
         'USER':'root',
         'PASSWORD':'root',
         'HOST':'127.0.0.1',
-        'PORT': '3306',
+	'PORT': '3306',
+
     }
 }
 
@@ -155,15 +153,15 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 #生产环境下 路径会失效
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, "static"),
+#)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 EMAIL_HOST = 'smtp.aliyun.com'
 EMAIL_PORT = 465

@@ -17,11 +17,12 @@ from django.urls import path,include,re_path
 from django.views.generic import TemplateView
 from django.views.static import serve
 import xadmin
+from django.views.generic.base import RedirectView
 
 from users.views import LoginView,RegisterView,ActiveUserView,ForgetPwdView,ResetUserView,ModifyPwdView,LogoutView,IndexView
 from organization.views import OrgView
-from iLearnOL.settings import MEDIA_ROOT
-from django.views.generic.base import RedirectView
+from iLearnOL.settings import MEDIA_ROOT,STATIC_ROOT
+
 
 favicon_view = RedirectView.as_view(url='/static/images/favicon.ico', permanent=True)
 
@@ -42,8 +43,7 @@ urlpatterns = [
 
     #配置上传文件、静态文件的处理函数
     re_path(r'^media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
-    #生成环境下 交给服务器处理
-    # re_path(r'^static/(?P<path>.*)', serve, {"document_root": STATIC_ROOT}),
+    re_path(r'^static/(?P<path>.*)', serve, {"document_root": STATIC_ROOT}),
 
     # namespace 使用命名空间防止重复
     #课程机构与讲师url配置  url分发   #会在org目录urls下找
