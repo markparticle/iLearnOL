@@ -95,11 +95,9 @@ class OrgHomeView(View):
                 has_fav = True
 
         all_courses = course_org.course_set.all().order_by('-click_nums')[:4]  #外键 取出所有课程
-
         teachers = course_org.teacher_set.all().order_by('-click_nums')[:1]
-        print(teachers)
         courses = course_org.course_set.filter(teacher=teachers)[:1]
-        print(courses)
+
         return render(request,'org-detail-homepage.html',{
             'courses':courses,
             'all_courses':all_courses,
@@ -201,14 +199,14 @@ class AddFavView(View):
                 course.save()
 
             if int(fav_type) == 2:
-                course_org = Course.objects.get(id=int(fav_id))
+                course_org = CourseOrg.objects.get(id=int(fav_id))
                 course_org.fav_nums -=1
                 if course_org < 0:
                     course_org = 0
                 course_org.save()
 
             if int(fav_type) == 3 :
-                teacher = Course.objects.get(id=int(fav_id))
+                teacher = Teacher.objects.get(id=int(fav_id))
                 teacher.fav_nums -=1
                 if teacher.fav_nums < 0:
                     teacher.fav_nums = 0
@@ -230,16 +228,14 @@ class AddFavView(View):
                     course.save()
 
                 if int(fav_type) == 2:
-                    course_org = Course.objects.get(id=int(fav_id))
+                    course_org = CourseOrg.objects.get(id=int(fav_id))
                     course_org.fav_nums += 1
                     course_org.save()
 
                 if int(fav_type) == 3:
-                    teacher = Course.objects.get(id=int(fav_id))
+                    teacher = Teacher.objects.get(id=int(fav_id))
                     teacher.fav_nums += 1
                     teacher.save()
-
-
                 return HttpResponse('{"status":"success", "msg":"已收藏"}', content_type='application/json')
             else:
                 return HttpResponse('{"status":"fail", "msg":"收藏出错"}', content_type='application/json')
@@ -269,7 +265,7 @@ class TeacherListView(View):
 
         #课程讲师分页
         try:
-            page = request.GET.get('page', 2)
+            page = request.GET.get('page',1)
         except PageNotAnInteger:
             page = 1
         p = Paginator(all_teachers, 4, request=request)  # 每页取5个显示
