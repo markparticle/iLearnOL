@@ -3,7 +3,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin-top: 8px;
+
     font-weight: normal;
     color: #202020;
 }
@@ -1873,7 +1873,7 @@ textarea:focus {
 }
 
 .module1 {
-    height: 614px;
+    height: 550px;
 }
 
 .module1 .left.box {
@@ -1881,7 +1881,7 @@ textarea:focus {
 }
 
 .group_list .box {
-    height: 300px;
+    height: 266px;
     border: 1px solid #ccc;
     width: 233px;
     float: left;
@@ -1899,7 +1899,7 @@ textarea:focus {
 }
 
 .group_list .box img {
-    height: 160px;
+    height: 150px;
 
 }
 
@@ -2796,9 +2796,9 @@ footer .footer .line {
 }
 
 .list .group_list .box {
-    width: 280px;
-    height: 280px;
-    margin: 3px;
+    width: 260px;
+    height: 260px;
+    margin: 13px;
     overflow: hidden;
 }
 .list .group_list .box11 {
@@ -3340,7 +3340,7 @@ footer .footer .line {
     width: 100%;
     float: left;
     text-align: center;
-    margin-top: 8px;
+
 }
 
 .butler_list_box dt .btn {
@@ -3513,7 +3513,7 @@ footer .footer .line {
     color: #fffc00;
     text-align: center;
     display: block;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 10px;
 }
 
@@ -5092,12 +5092,12 @@ footer .footer .line {
 .companyrank .des {
     width: 90% !important;
     padding: 5% !important;
-    height: 100px !important;
+    height: 60px !important;
 }
 
 .companyrank .des dd {
     width: 170px;
-    height: 80px;
+    height: 60px;
 }
 
 .companyrank .des p {
@@ -5328,16 +5328,16 @@ footer .footer .line {
 }
 
 .companycenter .group_list {
-    width: 945px;
+    width: 900px;
     height: auto !important;
     overflow: hidden;
 }
 
 .companycenter .group_list .box {
-    height: 280px;
+    height: 260px;
     position: relative;
-    margin: 30px 10px;
-    width: 214px !important;
+    margin: 25px 11.5px;
+    width: 200px !important;
 }
 .companycenter .group_list .box-1 {
     height: 245px;

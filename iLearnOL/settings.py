@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'captcha',
     'pure_pagination',
     'DjangoUeditor',
+    'corsheaders',
 ]
 
 PAGINATION_SETTINGS = {
@@ -71,6 +72,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 
 ]
 
@@ -162,10 +165,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-EMAIL_HOST = 'smtp.qq.com'
+EMAIL_HOST = 'smtp.aliyun.com'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = '496294776@qq.com'
-EMAIL_HOST_PASSWORD = 'fbaohuromoolbjbb'
+EMAIL_HOST_USER = 'ilearnol@aliyun.com'
+EMAIL_HOST_PASSWORD = 'ilearnol.mark'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL= True
-EMAIL_FROM = '496294776@qq.com'
+EMAIL_FROM = 'ilearnol@aliyun.com'

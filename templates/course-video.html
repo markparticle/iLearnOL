@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block title %}
-公开课视频信息 - iLearn
+{{ course.name }} | iLearnOnline
 {% endblock %}
 {% block custom_bread%}
     <section>
 	<div class="wp">
 		<div class="crumbs">
 			<ul>
-				<li><a href="index.html">首页</a>></li>
+				<li><a href="{% url 'index' %}">首页</a>></li>
                 <li><a href="{% url 'courses:course_list' %}">公开课程</a>></li>
                 <li><a href="{% url 'courses:course_detail' course.id %}">课程详情</a>></li>
 				<li>章节信息</li>

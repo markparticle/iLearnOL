@@ -21,6 +21,9 @@ import xadmin
 from users.views import LoginView,RegisterView,ActiveUserView,ForgetPwdView,ResetUserView,ModifyPwdView,LogoutView,IndexView
 from organization.views import OrgView
 from iLearnOL.settings import MEDIA_ROOT
+from django.views.generic.base import RedirectView
+
+favicon_view = RedirectView.as_view(url='/static/images/favicon.ico', permanent=True)
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
@@ -39,6 +42,7 @@ urlpatterns = [
 
     #配置上传文件、静态文件的处理函数
     re_path(r'^media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
+    #生成环境下 交给服务器处理
     # re_path(r'^static/(?P<path>.*)', serve, {"document_root": STATIC_ROOT}),
 
     # namespace 使用命名空间防止重复
@@ -51,6 +55,8 @@ urlpatterns = [
 
     #富文本相关URL
     path("ueditor/", include('DjangoUeditor.urls')),
+
+    path('favicon.ico/', favicon_view),
 ]
 
 #全局404页面

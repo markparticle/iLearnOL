@@ -94,7 +94,7 @@ class OrgHomeView(View):
             if UserFavorite.objects.filter(user=request.user,fav_id=course_org.id,fav_type=2):
                 has_fav = True
 
-        all_courses = course_org.course_set.all()[:4]  #外键 取出所有课程
+        all_courses = course_org.course_set.all().order_by('-click_nums')[:4]  #外键 取出所有课程
         all_teachers = course_org.teacher_set.all()[:2]
         return render(request,'org-detail-homepage.html',{
             'all_courses':all_courses,
@@ -112,7 +112,7 @@ class OrgCourseView(View):
     def get(self,request,org_id):
         current_page = 'course'
         course_org = CourseOrg.objects.get(id=int(org_id))
-        all_courses = course_org.course_set.all()[:3]  #外键 取出所有课程
+        all_courses = course_org.course_set.all().order_by('-click_nums')  #外键 取出所有课程
 
         # 查询用户是否收藏
         has_fav = False
@@ -181,7 +181,7 @@ class AddFavView(View):
         fav_type = request.POST.get('fav_type',0)
         #判断用户是否用户
         if not request.user.is_authenticated:  #判断用户是否登录
-            return HttpResponse('{"status":"fail", "msg":"用户未登录"}', content_type='application/json')
+            return HttpResponse('{"status":"fail", "msg":"用户未登录"}',content_type='application/json')
         exist_records = UserFavorite.objects.filter(user=request.user,fav_id=int(fav_id),fav_type=int(fav_type))  #联合查询  module里面要求了Int类型 要转换
         if exist_records:
             #如果记录存在，则表示用户取消收藏
@@ -209,7 +209,7 @@ class AddFavView(View):
                     teacher.fav_nums = 0
                 teacher.save()
 
-            return HttpResponse('{"status":"fail", "msg":"已取消收藏"}', content_type='application/json')
+            return HttpResponse('{"status":"fail", "msg":"已取消收藏"}',content_type='application/json')
         else:
             user_fav = UserFavorite()
             if int(fav_id) >0 and int(fav_type)>0:
@@ -233,11 +233,9 @@ class AddFavView(View):
                     teacher = Course.objects.get(id=int(fav_id))
                     teacher.fav_nums += 1
                     teacher.save()
-
-
-                return HttpResponse('{"status":"success", "msg":"已收藏"}', content_type='application/json')
+                return HttpResponse('{"status":"success","msg":"已收藏"}',content_type='application/json')
             else:
-                return HttpResponse('{"status":"fail", "msg":"收藏出错"}', content_type='application/json')
+                return HttpResponse('{"status":"fail","msg":"收藏出错"}', content_type='application/json')
 
 
 
