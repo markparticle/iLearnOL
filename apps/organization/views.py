@@ -16,7 +16,7 @@ class OrgView(View):
     课程机构列表
     '''
     def get(self,request):
-        all_orgs = CourseOrg.objects.all()
+        all_orgs = CourseOrg.objects.all().order_by('-fav_nums')    
         all_citys = CityDict.objects.all()
         hot_orgs = all_orgs.order_by('-click_nums')[:3]  #排名前三的热门机构提取
 
@@ -50,7 +50,7 @@ class OrgView(View):
             page = request.GET.get('page',1)
         except PageNotAnInteger:
             page = 1
-        p = Paginator(all_orgs,5,request=request)  #每页取5个显示
+        p = Paginator(all_orgs,4,request=request)  #每页取5个显示
         orgs = p.page(page)
 
 
@@ -95,10 +95,15 @@ class OrgHomeView(View):
                 has_fav = True
 
         all_courses = course_org.course_set.all().order_by('-click_nums')[:4]  #外键 取出所有课程
-        all_teachers = course_org.teacher_set.all()[:2]
+
+        teachers = course_org.teacher_set.all().order_by('-click_nums')[:1]
+        print(teachers)
+        courses = course_org.course_set.filter(teacher=teachers)[:1]
+        print(courses)
         return render(request,'org-detail-homepage.html',{
+            'courses':courses,
             'all_courses':all_courses,
-            'all_teachers':all_teachers,
+            'teachers':teachers,
             'course_org':course_org,
             'current_page':current_page,
             'has_fav':has_fav,
@@ -246,12 +251,11 @@ class TeacherListView(View):
     讲师列表页
     '''
     def get(self,request):
-        all_teachers =Teacher.objects.all().order_by('-add_time')
+        all_teachers =Teacher.objects.all().order_by('-fav_nums')    
         teacher_nums = all_teachers.count()
 
         search_keywords = request.GET.get('keywords', '')
         if search_keywords:
-
             all_teachers = all_teachers.filter(
                 Q(name__icontains=search_keywords) | Q(work_company__icontains=search_keywords)| Q(work_postion__icontains=search_keywords))
 	
@@ -268,7 +272,7 @@ class TeacherListView(View):
             page = request.GET.get('page', 2)
         except PageNotAnInteger:
             page = 1
-        p = Paginator(all_teachers, 5, request=request)  # 每页取5个显示
+        p = Paginator(all_teachers, 4, request=request)  # 每页取5个显示
         teachers = p.page(page)
 
         return render(request, 'teachers-list.html', {
@@ -276,7 +280,7 @@ class TeacherListView(View):
             "teacher_nums": teacher_nums,
             'sorted_teacher':sorted_teacher,
             'sort':sort,
-	    'teacher_nums':teacher_nums,
+            'teacher_nums':teacher_nums,
             'search_keywords':search_keywords,
          })
 
