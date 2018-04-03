@@ -11,7 +11,7 @@
 
 ## 功能
 
-![现功](C:\Users\markI\MyProject\iLearnOL\iLearnOL\实现功能.jpg)
+![现功](https://github.com/markWUparticle/iLearnOL/blob/master/%E5%AE%9E%E7%8E%B0%E5%8A%9F%E8%83%BD.jpg)
 
 ​	分析网页需求，采用模块分割降低耦合思想，将主要功能分为Users、Courses、Operation、Organization四个模块。重写admin，集成了 Xadmin框架完善了ORM后台管理系统，可以进行权限的管理，整合了富文本插件。前端使用模板继承来完成，同时用ajax异步请求完成收藏、咨询等功能。在CentOS7下使用Nginx+Uwsgi部署Django应用，使用 Sentry 对 Django 程序进行 Bug 监控报警、和追踪管理 。
 
