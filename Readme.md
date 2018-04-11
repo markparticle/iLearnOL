@@ -30,7 +30,6 @@
 $ git clone https://github.com/markWUparticle/iLearnOL
 $ cd iLearnOL
 $ pip install -r requirements.txt
-$ 创建数据库ilearnol
 $ python manage.py makemigrations
 $ python manage.py migrate
 $ python manage.py runserver  
