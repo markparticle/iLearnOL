@@ -5,10 +5,6 @@
 
 - 仿照[慕课网](http://www.imooc.com/)搭建的在线编程学习平台
 
-## 演示页
-
-演示地址：http://193.112.138.50
-
 ## 功能
 
 ![现功](https://github.com/markWUparticle/iLearnOL/blob/master/%E5%AE%9E%E7%8E%B0%E5%8A%9F%E8%83%BD.jpg)
